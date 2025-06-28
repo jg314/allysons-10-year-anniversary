@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Celebrating Allyson Lough's 10-year anniversary at Wired Impact. Join us in honoring a decade of dedication, leadership, and positive impact.">
+    <title>Allyson Lough - 10 Year Anniversary | Wired Impact</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="logo.svg" alt="Company Logo" class="logo">
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#video-section">What You Mean to Us</a></li>
+                <li><a href="#timeline">Journey</a></li>
+                <li><a href="#messages">Messages</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="anniversary-title">Thank You for <span class="highlight">10 Amazing Years</span></h1>
+                <p class="hero-subtitle">A decade of excellence, dedication, and making a difference at Wired Impact</p>
+                <button class="cta-button" onclick="triggerConfetti()">Celebrate with Us! 🎉</button>
+            </div>
+            <div class="hero-image">
+                <img src="allyson-lough.jpeg" alt="Allyson Lough">
+                <div class="image-decoration"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="video-section" class="video-section">
+        <div class="container">
+            <h2 class="section-title">What You Mean to Us</h2>
+            <p class="section-subtitle">Your colleagues share their appreciation and memories</p>
+            <div class="video-wrapper">
+                <!-- Replace the src URL with your actual team video URL -->
+                <iframe 
+                    src="https://www.youtube.com/embed/jNQXAC9IVRw" 
+                    title="Team Tribute Video for Allyson"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="timeline" class="timeline">
+        <div class="container">
+            <h2 class="section-title">10 Years of Impact</h2>
+            <div class="timeline-items">
+                <div class="timeline-item">
+                    <div class="timeline-year">2015</div>
+                    <div class="timeline-content">
+                        <h3>The Beginning</h3>
+                        <p>Allyson joins our team, bringing fresh perspectives and boundless enthusiasm</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2017</div>
+                    <div class="timeline-content">
+                        <h3>Rising Star</h3>
+                        <p>Leading key projects and mentoring new team members</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-content">
+                        <h3>Adapting & Thriving</h3>
+                        <p>Guiding the team through challenges with grace and innovation</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-content">
+                        <h3>A Decade of Excellence</h3>
+                        <p>Celebrating 10 years of invaluable contributions and leadership</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="messages" class="messages">
+        <div class="container">
+            <h2 class="section-title">What Our Clients Say About Allyson</h2>
+            <div class="message-grid">
+                <div class="message-card">
+                    <p>"Allyson's expertise and dedication transformed our nonprofit's online presence. She truly understands our mission and made our vision come to life."</p>
+                    <span class="quote-author">- Jennifer Martinez, Executive Director</span>
+                </div>
+                <div class="message-card">
+                    <p>"Working with Allyson has been incredible. Her patience, creativity, and technical skills helped us reach more families than ever before."</p>
+                    <span class="quote-author">- David Thompson, Foundation President</span>
+                </div>
+                <div class="message-card">
+                    <p>"Allyson doesn't just build websites; she builds relationships. Her commitment to our cause has made her feel like part of our team."</p>
+                    <span class="quote-author">- Rachel Kim, Program Director</span>
+                </div>
+                <div class="message-card special">
+                    <p>"In 10 years, Allyson has helped us grow from a small local charity to a national organization. We couldn't have done it without her."</p>
+                    <span class="quote-author">- Mark Anderson, Board Chair</span>
+                </div>
+            </div>
+            <button class="cta-button secondary" onclick="createBigConfetti()">Shower with Confetti! 🎊</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Wired Impact. Made with ❤️ for Allyson's 10-Year Anniversary</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
