@@ -75,6 +75,90 @@ nav a:hover {
     color: var(--primary-color);
 }
 
+nav a.active {
+    color: var(--primary-color);
+    position: relative;
+}
+
+nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+/* Mobile Menu Toggle Button */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    width: 30px;
+    height: 24px;
+    position: relative;
+}
+
+.hamburger-line {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-dark);
+    transition: all 0.3s ease;
+    left: 0;
+}
+
+.hamburger-line:nth-child(1) {
+    top: 0;
+}
+
+.hamburger-line:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.hamburger-line:nth-child(3) {
+    bottom: 0;
+}
+
+/* Hamburger animation when active */
+.mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
+}
+
+/* Menu overlay */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 998;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
 /* Hero Section */
 .hero {
     min-height: 100vh;
@@ -243,50 +327,61 @@ nav a:hover {
     border-radius: 15px;
 }
 
-/* Timeline */
-.timeline {
+/* Application Section */
+.application-section {
     padding: 80px 0;
-    background: white;
+    background: var(--bg-light);
 }
 
-.timeline-items {
-    display: grid;
-    gap: 3rem;
+.application-intro {
+    text-align: center;
     max-width: 800px;
+    margin: 0 auto 3rem;
+}
+
+.application-date {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.application-intro p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.application-content {
+    max-width: 900px;
     margin: 0 auto;
 }
 
-.timeline-item {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: 2rem;
-    align-items: center;
-}
-
-.timeline-year {
-    background: var(--primary-color);
-    color: white;
-    padding: 1rem;
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.5rem;
-    border-radius: 10px;
+.application-letter {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    border-left: 5px solid var(--primary-color);
+    margin: 0 0 2rem 0;
     box-shadow: var(--shadow);
 }
 
-.timeline-content h3 {
-    color: var(--secondary-color);
-    margin-bottom: 0.5rem;
+.application-letter p {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-style: italic;
 }
 
-.timeline-content p {
-    color: var(--text-light);
+.application-letter p:last-child {
+    margin-bottom: 0;
 }
 
 /* Messages Section */
 .messages {
     padding: 80px 0;
-    background: var(--bg-light);
+    background: white;
     text-align: center;
 }
 
@@ -327,9 +422,8 @@ nav a:hover {
     font-style: normal;
     font-size: 0.9rem;
     font-weight: 600;
-    opacity: 0.8;
     margin-top: 0.5rem;
-    color: var(--primary-color);
+    color: #8B2F23;  /* Darker red for better contrast (WCAG AA) */
 }
 
 .message-card.special .quote-author {
@@ -346,9 +440,48 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Mobile navigation styles */
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: calc(100vh - 70px);
+        background: white;
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+        flex-direction: column;
+        padding: 2rem;
+        transition: right 0.3s ease;
+        z-index: 999;
+        overflow-y: auto;
+    }
+    
+    .nav-menu.active {
+        right: 0;
+    }
+    
     nav ul {
-        gap: 1rem;
-        font-size: 0.9rem;
+        flex-direction: column;
+        gap: 2rem;
+        font-size: 1.1rem;
+        align-items: flex-start;
+        width: 100%;
+    }
+    
+    nav ul li {
+        width: 100%;
+    }
+    
+    nav ul a {
+        display: block;
+        padding: 0.5rem 0;
+        width: 100%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     .hero-content {
@@ -367,14 +500,16 @@ footer {
         display: block;
     }
 
-    .timeline-item {
-        grid-template-columns: 80px 1fr;
-        gap: 1rem;
+    .application-letter {
+        padding: 2rem;
     }
-
-    .timeline-year {
-        font-size: 1.2rem;
-        padding: 0.5rem;
+    
+    .application-letter p {
+        font-size: 1rem;
+    }
+    
+    .impact-note {
+        padding: 1.5rem;
     }
 
     .message-grid {
@@ -413,4 +548,25 @@ img {
 
 img.loaded {
     opacity: 1;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    html {
+        scroll-behavior: auto;
+    }
+    
+    .hero::before {
+        display: none;
+    }
+    
+    .image-decoration {
+        animation: none;
+    }
 }

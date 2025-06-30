@@ -67,6 +67,33 @@ window.addEventListener('load', () => {
     }, 500);
 });
 
+// Mobile menu toggle
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const navMenu = document.querySelector('.nav-menu');
+const menuOverlay = document.querySelector('.menu-overlay');
+
+mobileMenuToggle.addEventListener('click', function() {
+    navMenu.classList.toggle('active');
+    mobileMenuToggle.classList.toggle('active');
+    menuOverlay.classList.toggle('active');
+});
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
+        menuOverlay.classList.remove('active');
+    });
+});
+
+// Close mobile menu when clicking on overlay
+menuOverlay.addEventListener('click', function() {
+    navMenu.classList.remove('active');
+    mobileMenuToggle.classList.remove('active');
+    menuOverlay.classList.remove('active');
+});
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -86,7 +113,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Header scroll effect
-let lastScroll = 0;
 const header = document.querySelector('header');
 
 window.addEventListener('scroll', () => {
@@ -99,8 +125,32 @@ window.addEventListener('scroll', () => {
         header.style.background = 'rgba(255, 255, 255, 0.95)';
         header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
     }
-    
-    lastScroll = currentScroll;
+});
+
+// Active navigation state
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+const navObserverOptions = {
+    rootMargin: '-20% 0px -70% 0px'
+};
+
+const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${id}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
+}, navObserverOptions);
+
+sections.forEach(section => {
+    navObserver.observe(section);
 });
 
 // Intersection Observer for fade-in animations
@@ -118,30 +168,14 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Apply observer to timeline items and message cards
+// Apply observer to application content and message cards
 document.addEventListener('DOMContentLoaded', () => {
-    const elements = document.querySelectorAll('.timeline-item, .message-card');
+    const elements = document.querySelectorAll('.application-letter, .message-card');
     elements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'all 0.6s ease-out';
         observer.observe(el);
-    });
-});
-
-// Random confetti on timeline year click
-document.querySelectorAll('.timeline-year').forEach(year => {
-    year.style.cursor = 'pointer';
-    year.addEventListener('click', function() {
-        const rect = this.getBoundingClientRect();
-        const x = (rect.left + rect.width / 2) / window.innerWidth;
-        const y = (rect.top + rect.height / 2) / window.innerHeight;
-        
-        confetti({
-            ...confettiDefaults,
-            particleCount: 50,
-            origin: { x, y }
-        });
     });
 });
 
