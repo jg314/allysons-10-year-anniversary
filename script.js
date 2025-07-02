@@ -19,10 +19,9 @@ function triggerConfetti() {
 
 // Create big confetti celebration
 function createBigConfetti() {
-    const duration = 3 * 1000;
+    const duration = 2 * 1000; // Reduced from 3 to 2 seconds
     const animationEnd = Date.now() + duration;
-
-    let skew = 1;
+    let frameCount = 0;
 
     function randomInRange(min, max) {
         return Math.random() * (max - min) + min;
@@ -35,7 +34,14 @@ function createBigConfetti() {
             return;
         }
 
-        const particleCount = 50 * (timeLeft / duration);
+        // Only fire every 3rd frame to reduce load
+        frameCount++;
+        if (frameCount % 3 !== 0) {
+            requestAnimationFrame(frame);
+            return;
+        }
+
+        const particleCount = Math.max(15, 30 * (timeLeft / duration)); // Reduced particle count
         
         // Confetti from left
         confetti({
@@ -190,21 +196,28 @@ document.querySelectorAll('img').forEach(img => {
     }
 });
 
-// Add hover effect to message cards
-document.querySelectorAll('.message-card').forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        const rect = this.getBoundingClientRect();
-        const x = (rect.left + rect.width / 2) / window.innerWidth;
-        const y = (rect.top + rect.height / 2) / window.innerHeight;
-        
-        confetti({
-            particleCount: 10,
-            spread: 60,
-            origin: { x, y },
-            colors: ['#cd4632', '#f39c12'],
-            ticks: 30,
-            gravity: 0.3,
-            scalar: 0.5
-        });
+// Easter Egg
+const easterEggTrigger = document.querySelector('.easter-egg-trigger');
+const easterEggModal = document.getElementById('easter-egg-modal');
+const closeModal = document.querySelector('.close-modal');
+
+easterEggTrigger.addEventListener('click', function() {
+    easterEggModal.classList.add('active');
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#cd4632', '#f39c12', '#2c3e50']
     });
 });
+
+closeModal.addEventListener('click', function() {
+    easterEggModal.classList.remove('active');
+});
+
+easterEggModal.addEventListener('click', function(e) {
+    if (e.target === easterEggModal) {
+        easterEggModal.classList.remove('active');
+    }
+});
+
