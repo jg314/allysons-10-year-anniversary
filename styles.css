@@ -189,9 +189,9 @@ nav a.active::after {
 .hero-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 2rem;
     align-items: center;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
     position: relative;
@@ -268,8 +268,10 @@ nav a.active::after {
 
 .hero-image img {
     width: 100%;
-    max-width: 450px;
+    max-width: 700px;
     height: auto;
+    object-fit: cover;
+    aspect-ratio: 16/9;
     border-radius: 20px;
     box-shadow: var(--shadow-lg);
     position: relative;
@@ -583,7 +585,7 @@ footer {
     }
 
     .hero-image img {
-        max-width: 300px;
+        max-width: 100%;
         margin: 0 auto;
         display: block;
     }
